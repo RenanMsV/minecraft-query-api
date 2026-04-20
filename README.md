@@ -4,11 +4,12 @@ A lightweight REST API for querying Minecraft server status (Java, legacy, and B
 Perfect for dashboards, bots, and monitoring tools.
 
 ## Features
-- Supports Java (1.7+), legacy Java (Beta 1.8-1.6), and Bedrock
-- Simple REST endpoints
-- Lightweight Flask backend
-- Cached responses
-- Ready for [Heroku](https://heroku.com) and [Render](https://render.com) deployment
+- Supports Java (1.7+), legacy Java (Beta 1.8-1.6), and Bedrock.
+- Simple **RESTful** endpoints.
+- Lightweight Flask backend.
+- **Cached** responses.
+- **Rate-limited** endpoints.
+- Ready for [Heroku](https://heroku.com) and [Render](https://render.com) deployment.
 
 ## Running Locally
 
