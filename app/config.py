@@ -13,6 +13,7 @@ APP_DESCRIPTION = (
 )
 
 CACHE_TIMEOUT = 120
+RATE_LIMIT_DEFAULT = "30 per minute"
 PRINT_ROUTES_ON_START = False
 
 
@@ -31,3 +32,4 @@ class OutboundMessages:
         "Java Legacy (Beta 1.8 - 1.6)"
     )
     TIMEOUT_BEDROCK = "Timeout. Wrong port, offline or not Bedrock"
+    RATE_LIMIT_BREACHED = "Too many requests. Please slow down."

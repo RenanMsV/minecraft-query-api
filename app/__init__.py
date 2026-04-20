@@ -5,7 +5,7 @@
 __version__ = "1.2.0"
 
 from flask import Flask
-from app.extensions import cache, logger
+from app.extensions import cache, logger, limiter
 from app.config import PRINT_ROUTES_ON_START
 from app.routes.root import root_bp
 from app.routes.java import java_bp
@@ -23,6 +23,7 @@ def create_app():
     app.url_map.strict_slashes = False
 
     cache.init_app(app, config={'CACHE_TYPE': 'SimpleCache'})
+    limiter.init_app(app)
 
     app.register_blueprint(root_bp)  # prefix: "/"
     app.register_blueprint(java_bp, url_prefix="/api/java")
