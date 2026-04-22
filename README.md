@@ -106,7 +106,7 @@ https://your-app-url.com/api/full/java/mc.hypixel.net
 
 Environment variables are used to configure the API and override default values.
 
-By default, the project runs entirely in memory and does not require external services like Redis. However, this can be changed by setting the appropriate environment variables. Use the .env.example as a guide.
+By default, the project runs entirely in memory and does not require external services like Redis. However, this can be changed by setting the appropriate environment variables. Use the [.env.example](.env.example) as a guide.
 
 ---
 
