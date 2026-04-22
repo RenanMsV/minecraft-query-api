@@ -4,3 +4,4 @@ Flask-RESTful>=0.3.10,<0.4.0
 Flask-Limiter>=4.1.1,<5.0.0
 mcstatus>=13.0.0,<14.0.0
 waitress>=3.0.2,<4.0.0
+python-dotenv>=1.2.2,<2.0.0
