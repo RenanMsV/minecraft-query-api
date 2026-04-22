@@ -2,8 +2,12 @@
 
 """A set of constants and config values in use by the app."""
 
-from app import __version__
+import os
 
+from app import __version__
+from app.env import EnvParser
+
+# App Metadata
 APP_VERSION = __version__
 APP_ID = "renanmsv/minecraft-query-api"
 APP_NAME = "Simple Minecraft Query RESTful API"
@@ -12,11 +16,8 @@ APP_DESCRIPTION = (
     "player and status information."
 )
 
-CACHE_TIMEOUT = 120
-RATE_LIMIT_DEFAULT = "30 per minute"
-PRINT_ROUTES_ON_START = False
 
-
+# Constants
 class DefaultPorts:
     """Default ports used by Minecraft servers"""
     JAVA = 25565
@@ -33,3 +34,35 @@ class OutboundMessages:
     )
     TIMEOUT_BEDROCK = "Timeout. Wrong port, offline or not Bedrock"
     RATE_LIMIT_BREACHED = "Too many requests. Please slow down."
+
+
+# Rate Limiter Configs
+CACHE_TIMEOUT = int(os.getenv("CACHE_TIMEOUT", "120"))
+RATE_LIMIT_ENABLED = EnvParser.bool("RATE_LIMIT_ENABLED", True)
+RATE_LIMIT_DEFAULT = os.getenv(
+    "RATE_LIMIT_DEFAULT",
+    "3 per second;30 per minute"
+)
+RATE_LIMIT_IN_MEMORY_FALLBACK = os.getenv(
+    "RATE_LIMIT_IN_MEMORY_FALLBACK",
+    "1 per second;15 per minute"
+)
+RATE_LIMIT_META = os.getenv(
+    "RATE_LIMIT_META",
+    "1000 per hour;6000 per 12 hours"
+)
+RATE_LIMIT_STORAGE_URI = os.getenv("RATE_LIMIT_STORAGE_URI", "memory://")
+RATE_LIMIT_STORAGE_OPTIONS = EnvParser.kwarg("RATE_LIMIT_STORAGE_OPTIONS")
+RATELIMIT_IP_EXEMPT_IPS = EnvParser.list("RATELIMIT_IP_EXEMPT_IPS")
+RATE_LIMIT_HEADERS_ENABLED = EnvParser.bool("RATE_LIMIT_HEADERS_ENABLED", True)
+RATE_LIMIT_KEY_PREFIX = os.getenv("RATE_LIMIT_KEY_PREFIX", "mcqueryapi:")
+RATE_LIMIT_STRATEGY = os.getenv("RATE_LIMIT_STRATEGY", "fixed-window")
+RATE_LIMIT_SWALLOW_ERRORS = EnvParser.bool("RATE_LIMIT_SWALLOW_ERRORS", True)
+RATE_LIMIT_IN_MEMORY_FALLBACK_ENABLED = EnvParser.bool(
+    "RATE_LIMIT_IN_MEMORY_FALLBACK_ENABLED",
+    True
+)
+RATE_LIMIT_FAIL_ON_FIRST_BREACH = EnvParser.bool(
+    "RATELIMIT_FAIL_ON_FIRST_BREACH",
+    True
+)
