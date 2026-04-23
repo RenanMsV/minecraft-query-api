@@ -17,7 +17,23 @@ logging.basicConfig(
 )
 logger = logging.getLogger(config.APP_ID)
 
-cache = Cache()
+cache = Cache(config={
+    'CACHE_TYPE': config.CACHE_TYPE,
+    'CACHE_DEFAULT_TIMEOUT': config.CACHE_DEFAULT_TIMEOUT,
+    'CACHE_IGNORE_ERRORS': config.CACHE_IGNORE_ERRORS,
+    'CACHE_THRESHOLD': config.CACHE_THRESHOLD,
+    'CACHE_DIR': config.CACHE_DIR,
+
+    'CACHE_OPTIONS': config.CACHE_OPTIONS,
+
+    'CACHE_REDIS_HOST': config.CACHE_REDIS_HOST,
+    'CACHE_REDIS_PORT': config.CACHE_REDIS_PORT,
+    'CACHE_REDIS_PASSWORD': config.CACHE_REDIS_PASSWORD,
+    'CACHE_REDIS_DB': config.CACHE_REDIS_DB,
+    'CACHE_REDIS_URL': config.CACHE_REDIS_URL,
+
+    'CACHE_MEMCACHED_SERVERS': config.CACHE_MEMCACHED_SERVERS,
+})
 
 
 def _rate_limit_exceeded_handler(_request_limit: RequestLimit):

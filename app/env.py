@@ -49,6 +49,25 @@ class EnvParser:
         raise ValueError(f"Invalid boolean value for {name}: {value}")
 
     @staticmethod
+    def int(name, default=None):
+        """Parses a string as an interger"""
+        value = os.getenv(name)
+        if value is None:
+            return default
+        try:
+            return int(value)
+        except ValueError as e:
+            raise ValueError(f"Invalid int value for {name}: {value}") from e
+
+    @staticmethod
+    def string(name, default=None):
+        """Doesn't parse but just returns the string"""
+        value = os.getenv(name)
+        if value is None:
+            return default
+        return value
+
+    @staticmethod
     def list(name, separator=";", default=None):
         """Parse environment variable into a list using a separator."""
         value = os.getenv(name)
