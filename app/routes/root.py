@@ -11,7 +11,7 @@ from app.config import (
     APP_NAME,
     APP_VERSION,
     APP_DESCRIPTION,
-    CACHE_TIMEOUT,
+    CACHE_DEFAULT_TIMEOUT,
     DefaultPorts
 )
 
@@ -21,7 +21,7 @@ api = Api(root_bp)
 
 class Root(Resource):
     """Main page route."""
-    @cache.cached(timeout=CACHE_TIMEOUT)
+    @cache.cached(timeout=CACHE_DEFAULT_TIMEOUT)
     def get(self):
         """The main page shows a status message and
         other related information."""
@@ -49,7 +49,7 @@ class Root(Resource):
                 "bedrock": DefaultPorts.BEDROCK
             },
             "cache": {
-                "cache_timeout_ms": CACHE_TIMEOUT * 1000
+                "cache_timeout_ms": CACHE_DEFAULT_TIMEOUT * 1000
             }
         }, HTTPStatus.OK
 

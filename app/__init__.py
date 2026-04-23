@@ -21,7 +21,7 @@ def create_app():
     app = Flask(__name__.split('.', maxsplit=1)[0])
     app.url_map.strict_slashes = False
 
-    cache.init_app(app, config={'CACHE_TYPE': 'SimpleCache'})
+    cache.init_app(app)
     limiter.init_app(app)
 
     app.register_blueprint(root_bp)  # prefix: "/"

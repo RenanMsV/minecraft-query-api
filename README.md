@@ -1,6 +1,6 @@
 # Minecraft Query API
 
-A lightweight RESTful API for querying Minecraft server status (Java, legacy, and Bedrock) using the [mcstatus](https://pypi.org/project/mcstatus/) library.
+A lightweight RESTful API for querying Minecraft server status (Java, legacy, and Bedrock) using the [mcstatus] library.
 Perfect for dashboards, bots, and monitoring tools.
 
 ## Features
@@ -8,8 +8,8 @@ Perfect for dashboards, bots, and monitoring tools.
 - Simple **RESTful** endpoints.
 - Lightweight Flask backend.
 - **Cached** responses.
-- [**Rate-limited**](#rate-limit-configs) endpoints.
-- Ready for [Heroku](https://heroku.com) and [Render](https://render.com) deployment.
+- [**Rate-limited**](#rate-limiting) endpoints.
+- Ready for [Heroku] and [Render] deployment.
 
 ---
 
@@ -25,7 +25,7 @@ python -m app
 waitress-serve --listen=127.0.0.1:3000 app:create_app
 ```
 
-[VSCode](https://code.visualstudio.com/) launch configurations are included.
+[VSCode] launch configurations are included.
 
 ## Deployment
 
@@ -106,28 +106,38 @@ https://your-app-url.com/api/full/java/mc.hypixel.net
 
 Environment variables are used to configure the API and override default values.
 
-By default, the project runs entirely in memory and does not require external services like Redis. However, this can be changed by setting the appropriate environment variables. Use the [.env.example](.env.example) as a guide.
+By default, the project runs entirely in memory and does not require external services like [Redis]. However, this can be changed by setting the appropriate environment variables. Use the [.env.example](.env.example) as a guide.
 
 ---
 
 ## Cache
 
-This project uses [Flask-Caching](https://pypi.org/project/Flask-Caching/) to provide response caching.
+This project uses [Flask-Caching] to provide response caching.
 
-Requests are cached, and cached responses are returned until the cache expires. By default, the API uses in-memory caching and does not require external services like Redis. However, this can be changed by configuring the appropriate environment variables.
+Requests are cached, and cached responses are returned until the cache expires.
+
+### Cache storage backend dependencies
+
+By default, this API uses in-memory storage. If you choose a different storage backend, you may need to install additional dependencies manually.
+
+For production use, [Redis] is recommended:
+
+```sh
+pip install redis
+```
 
 ---
 
 ## Rate Limiting
 
-This project uses [Flask-Limiter](https://flask-limiter.readthedocs.io/en/stable/index.html#installation) to provide Rate-Limits.
+This project uses [Flask-Limiter] to provide Rate-Limits.
 
-### Storage Backend Dependencies
+### Storage backend dependencies
 
 By default, this API uses in-memory storage.
 If you choose a different storage backend, you may need to install additional dependencies manually.
 
-For production use, [Redis](https://pypi.org/project/redis) is recommended:
+For production use, [Redis] is recommended:
 
 ```sh
 pip install Flask-Limiter[redis]
@@ -140,3 +150,11 @@ Other supported backends:
 - Valkey → `pip install Flask-Limiter[valkey]`
 
 For more information on supported backends, refer to the Flask-Limiter [documentation](https://flask-limiter.readthedocs.io/en/stable/index.html#installation) and the [storage](https://limits.readthedocs.io/en/stable/storage.html) options.
+
+[Heroku]: https://heroku.com
+[Render]: https://render.com
+[VSCode]: https://code.visualstudio.com/
+[Flask-Caching]: https://flask-caching.readthedocs.io/en/latest/
+[Flask-Limiter]: https://flask-limiter.readthedocs.io/en/stable/index.html#installation
+[Redis]: https://pypi.org/project/redis
+[mcstatus]: https://pypi.org/project/mcstatus/

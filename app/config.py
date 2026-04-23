@@ -36,8 +36,21 @@ class OutboundMessages:
     RATE_LIMIT_BREACHED = "Too many requests. Please slow down."
 
 
+# Cache Configs
+CACHE_TYPE = os.getenv("CACHE_TYPE", "SimpleCache")
+CACHE_OPTIONS = EnvParser.kwarg("CACHE_OPTIONS", ";", {})
+CACHE_DIR = EnvParser.string("CACHE_DIR", ".cache")
+CACHE_DEFAULT_TIMEOUT = EnvParser.int("CACHE_DEFAULT_TIMEOUT", 120)
+CACHE_IGNORE_ERRORS = EnvParser.bool("CACHE_IGNORE_ERRORS", False)
+CACHE_THRESHOLD = EnvParser.int("CACHE_THRESHOLD", 500)
+CACHE_REDIS_HOST = EnvParser.string("CACHE_REDIS_HOST", "")
+CACHE_REDIS_PORT = EnvParser.int("CACHE_REDIS_PORT", 6379)
+CACHE_REDIS_PASSWORD = EnvParser.string("CACHE_REDIS_PASSWORD", "")
+CACHE_REDIS_DB = EnvParser.int("CACHE_REDIS_DB", 0)
+CACHE_REDIS_URL = EnvParser.string("CACHE_REDIS_URL", "")
+CACHE_MEMCACHED_SERVERS = EnvParser.list("CACHE_MEMCACHED_SERVERS", ";", [])
+
 # Rate Limiter Configs
-CACHE_TIMEOUT = int(os.getenv("CACHE_TIMEOUT", "120"))
 RATE_LIMIT_ENABLED = EnvParser.bool("RATE_LIMIT_ENABLED", True)
 RATE_LIMIT_DEFAULT = os.getenv(
     "RATE_LIMIT_DEFAULT",
