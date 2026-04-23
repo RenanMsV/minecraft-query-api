@@ -7,7 +7,7 @@ Perfect for dashboards, bots, and monitoring tools.
 - Supports Java (1.7+), legacy Java (Beta 1.8-1.6), and Bedrock.
 - Simple **RESTful** endpoints.
 - Lightweight Flask backend.
-- **Cached** responses.
+- [**Cached**](#cache) responses.
 - [**Rate-limited**](#rate-limiting) endpoints.
 - Ready for [Heroku] and [Render] deployment.
 
@@ -151,10 +151,39 @@ Other supported backends:
 
 For more information on supported backends, refer to the Flask-Limiter [documentation](https://flask-limiter.readthedocs.io/en/stable/index.html#installation) and the [storage](https://limits.readthedocs.io/en/stable/storage.html) options.
 
+## License
+
+This project is licensed under the [MIT License].
+
+## Third-Party Dependencies
+
+This project relies on several open-source libraries, including:
+
+- [Flask]
+- [Flask-RESTful]
+- [Flask-Caching]
+- [Flask-Limiter]
+- [mcstatus]
+- [waitress]
+- [python-dotenv]
+
+And a few optional ones like:
+
+- [Redis]
+- [Pymemcache]
+
+All third-party libraries retain their respective licenses.
+
 [Heroku]: https://heroku.com
 [Render]: https://render.com
 [VSCode]: https://code.visualstudio.com/
-[Flask-Caching]: https://flask-caching.readthedocs.io/en/latest/
-[Flask-Limiter]: https://flask-limiter.readthedocs.io/en/stable/index.html#installation
-[Redis]: https://pypi.org/project/redis
+[waitress]: https://pypi.org/project/waitress/
+[Flask]: https://pypi.org/project/Flask/
+[Flask-RESTful]: https://pypi.org/project/Flask-RESTful/
+[Flask-Caching]: https://pypi.org/project/Flask-Caching/
+[Flask-Limiter]: https://pypi.org/project/Flask-Limiter/
+[Redis]: https://pypi.org/project/redis/
+[Pymemcache]: https://pypi.org/project/pymemcache/
 [mcstatus]: https://pypi.org/project/mcstatus/
+[python-dotenv]: https://pypi.org/project/python-dotenv/
+[MIT License]: https://opensource.org/license/mit
