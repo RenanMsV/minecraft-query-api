@@ -20,6 +20,9 @@ dist/
 .DS_Store
 Thumbs.db
 
+# Cache
+.cache
+
 # VSCode
 .vscode/*
 !.vscode/launch.json
