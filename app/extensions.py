@@ -9,13 +9,15 @@ from flask_caching import Cache
 from flask_limiter import Limiter, RequestLimit
 from flask_limiter.util import get_remote_address
 
-from app import config
+from app.config import config, AppMetadata
+
+config.load_env()
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] [%(name)s] %(message)s"
 )
-logger = logging.getLogger(config.APP_ID)
+logger = logging.getLogger(AppMetadata.APP_ID)
 
 cache = Cache(config={
     'CACHE_TYPE': config.CACHE_TYPE,
