@@ -3,9 +3,6 @@
 """Handles the loading and parsing of environment variables"""
 
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 
 class EnvParser:
@@ -37,7 +34,12 @@ class EnvParser:
 
     @staticmethod
     def bool(name, default=False):
-        """Parses a string as a boolean"""
+        """Parses a string as a boolean.
+
+        Args:
+            name: The environment variable name.
+            default: A value that must be returned as a fallback.
+        """
         value = os.getenv(name)
         if value is None:
             return default
@@ -50,7 +52,12 @@ class EnvParser:
 
     @staticmethod
     def int(name, default=None):
-        """Parses a string as an interger"""
+        """Parses a string as an interger.
+
+        Args:
+            name: The environment variable name.
+            default: A value that must be returned as a fallback.
+        """
         value = os.getenv(name)
         if value is None:
             return default
@@ -61,7 +68,19 @@ class EnvParser:
 
     @staticmethod
     def string(name, default=None):
-        """Doesn't parse but just returns the string"""
+        """Does not parse, just returns the string.
+
+        This works almost the same as:
+        ```
+        import os
+        os.getenv(name: str, default: str)
+        ```
+        But in here you can set a default value with a type other than string.
+
+        Args:
+            name: The environment variable name.
+            default: A value that must be returned as a fallback.
+        """
         value = os.getenv(name)
         if value is None:
             return default
@@ -69,7 +88,12 @@ class EnvParser:
 
     @staticmethod
     def list(name, separator=";", default=None):
-        """Parse environment variable into a list using a separator."""
+        """Parse environment variable into a list using a separator.
+
+        Args:
+            name: The environment variable name.
+            default: A value that must be returned as a fallback.
+        """
         value = os.getenv(name)
         if value is None:
             return default if default is not None else []
@@ -83,7 +107,12 @@ class EnvParser:
 
     @staticmethod
     def kwarg(name, separator=";", default=None, infer_types=True):
-        """Parse environment variable into a non-nested kwarg dict."""
+        """Parse environment variable into a non-nested kwarg dict.
+
+        Args:
+            name: The environment variable name.
+            default: A value that must be returned as a fallback.
+        """
         value = os.getenv(name)
         if value is None:
             return default if default is not None else {}

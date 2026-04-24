@@ -8,10 +8,8 @@ from flask_restful import Api, Resource
 
 from app.extensions import cache
 from app.config import (
-    APP_NAME,
-    APP_VERSION,
-    APP_DESCRIPTION,
-    CACHE_DEFAULT_TIMEOUT,
+    config,
+    AppMetadata,
     DefaultPorts
 )
 
@@ -21,15 +19,14 @@ api = Api(root_bp)
 
 class Root(Resource):
     """Main page route."""
-    @cache.cached(timeout=CACHE_DEFAULT_TIMEOUT)
+    @cache.cached(timeout=config.CACHE_DEFAULT_TIMEOUT)
     def get(self):
-        """The main page shows a status message and
-        other related information."""
+        """The main page shows a status message and other informations"""
         return {
             "status": "online",
-            "service": APP_NAME,
-            "version": APP_VERSION,
-            "description": APP_DESCRIPTION,
+            "service": AppMetadata.APP_NAME,
+            "version": AppMetadata.APP_VERSION,
+            "description": AppMetadata.APP_DESCRIPTION,
             "routes": {
                 "java_full": "/api/java/full/{ip}/{port?}",
                 "java_players": "/api/java/playercount/{ip}/{port?}",
@@ -49,7 +46,7 @@ class Root(Resource):
                 "bedrock": DefaultPorts.BEDROCK
             },
             "cache": {
-                "cache_timeout_ms": CACHE_DEFAULT_TIMEOUT * 1000
+                "cache_timeout_ms": config.CACHE_DEFAULT_TIMEOUT * 1000
             }
         }, HTTPStatus.OK
 
