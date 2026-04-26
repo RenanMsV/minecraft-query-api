@@ -6,7 +6,7 @@ from flask_restful import Resource
 from flask import request
 from app.handlers import handle_query
 from app.extensions import cache
-from app.config import CACHE_TIMEOUT
+from app.config import config
 
 
 def create_resource(
@@ -20,7 +20,7 @@ def create_resource(
     class GenericResource(Resource):
         """A class defining a customizable resource"""
         @cache.cached(
-            timeout=CACHE_TIMEOUT,
+            timeout=config.CACHE_DEFAULT_TIMEOUT,
             key_prefix=lambda: f"{request.path}:{request.view_args}"
         )
         def get(self, ip, port=None):

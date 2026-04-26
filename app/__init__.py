@@ -2,11 +2,10 @@
 
 """The Minecraft Query API app definition."""
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
-from flask import Flask
-from app.extensions import cache, logger
-from app.config import PRINT_ROUTES_ON_START
+from flask import Flask, Blueprint
+from app.extensions import cache, limiter, logger
 from app.routes.root import root_bp
 from app.routes.java import java_bp
 from app.routes.bedrock import bedrock_bp
@@ -22,29 +21,31 @@ def create_app():
     app = Flask(__name__.split('.', maxsplit=1)[0])
     app.url_map.strict_slashes = False
 
-    cache.init_app(app, config={'CACHE_TYPE': 'SimpleCache'})
+    cache.init_app(app)
+    logger.info(
+        "Cache initialized. Type: %s, Timeout: %s",
+        cache.config["CACHE_TYPE"],
+        cache.config["CACHE_DEFAULT_TIMEOUT"]
+    )
 
-    app.register_blueprint(root_bp)  # prefix: "/"
-    app.register_blueprint(java_bp, url_prefix="/api/java")
-    app.register_blueprint(bedrock_bp, url_prefix="/api/bedrock")
-    app.register_blueprint(legacy_bp, url_prefix="/api/java_legacy")
+    limiter.init_app(app)
+    logger.info(
+        "Rate limiter initialized. Enabled: %s, Storage type(s): %s",
+        limiter.enabled,
+        limiter.storage.STORAGE_SCHEME
+    )
 
-    # print all defined routes before starting
-    if PRINT_ROUTES_ON_START:
-        with app.app_context():
-            logger.info("Initializing app with the following routes defined:")
-            for rule in app.url_map.iter_rules():
-                methods = sorted(
-                    m
-                    for m in rule.methods
-                    if m not in ("HEAD", "OPTIONS")
-                )
+    def _register_bp(bp: Blueprint, url_prefix=None):
+        app.register_blueprint(blueprint=bp, url_prefix=url_prefix)
+        logger.info(
+            "Registered route bp (%s) into url (%s)",
+            bp.name,
+            url_prefix
+        )
 
-                logger.info(
-                    "[%s] %-40s → %s",
-                    ",".join(methods),
-                    rule.rule,
-                    rule.endpoint
-                )
+    _register_bp(root_bp, "/")  # prefix: "/"
+    _register_bp(java_bp, url_prefix="/api/java")
+    _register_bp(bedrock_bp, url_prefix="/api/bedrock")
+    _register_bp(legacy_bp, url_prefix="/api/java_legacy")
 
     return app
