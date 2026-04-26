@@ -2,7 +2,7 @@
 
 """The Minecraft Query API app definition."""
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 from flask import Flask, Blueprint
 from app.extensions import cache, limiter, logger

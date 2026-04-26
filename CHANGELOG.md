@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-04-26
+
 ### Added
 
 - Added [VSCode] launch configurations.
@@ -16,10 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added support for [Redis], [Memcached], and other storage backends for caching and rate limiting.
 - Added [CHANGELOG.md](CHANGELOG.md) to document the changes to this project.
 - The project is now licensed under the [MIT License].
+- Better logging is displayed during initialization.
 
 ### Changed
 
 - Requirements: Uses `>=` instead of `==` for better dependency handling.
+- Configs are now lazy loaded.
+- Root page content has been reduced a bit.
 
 ## [1.2.0] - 2026-04-02
 
@@ -78,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Procfile ready for deploying on [Heroku].
 
 [unreleased]: https://github.com/RenanMsV/minecraft-query-api/compare/main...dev
+[1.3.0]: https://github.com/RenanMsV/minecraft-query-api/releases/tag/1.3.0
 [1.2.0]: https://github.com/RenanMsV/minecraft-query-api/releases/tag/1.2.0
 [1.1.1]: https://github.com/RenanMsV/minecraft-query-api/releases/tag/1.1.1
 [1.1.0]: https://github.com/RenanMsV/minecraft-query-api/releases/tag/1.1.0
