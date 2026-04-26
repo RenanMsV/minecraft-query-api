@@ -11,13 +11,14 @@ from flask_limiter.util import get_remote_address
 
 from app.config import config, AppMetadata
 
-config.load_env()
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] [%(name)s] %(message)s"
 )
 logger = logging.getLogger(AppMetadata.APP_ID)
+
+logger.info("Loading environment variables")
+config.load_env()
 
 cache = Cache(config={
     'CACHE_TYPE': config.CACHE_TYPE,
